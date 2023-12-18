@@ -4,7 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
-const data = ref();
+const data = ref({});
 const isLoading = ref(true);
 const error = ref(null);
 
