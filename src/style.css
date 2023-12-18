@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+# Front-end Style Guide
+
+## Layout
+
+The designs were created to the following widths:
+
+- Mobile: 375px
+- Desktop: 1440px
+- Font size (quote): 28px
+
+*/
+
+@layer utilities {
+  /* ### Primary */
+  .light-cyan {
+    color: hsl(193, 38%, 86%);
+  }
+  .neon-green {
+    color: hsl(150, 100%, 66%);
+  }
+
+  .bg-neon-green {
+    background: hsl(150, 100%, 66%);
+  }
+
+  .bg-light-cyan {
+    background: hsl(193, 38%, 86%);
+  }
+
+  .shadow-neon-green-500\/50 {
+    --tw-shadow-color: hsl(150, 100%, 66%, 0.5)
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+
+  /* ### Neutral */
+  .border-grayish-blue {
+    border-color: hsl(217, 19%, 38%);
+  }
+  .bg-dark-grayish-blue {
+    background: hsl(217, 19%, 24%);
+  }
+  .bg-dark-blue {
+    background: hsl(218, 23%, 16%);
+  }
+}
+
+* {
+  font-family: "Manrope", sans-serif;
+}
+
+html, body {
+  @apply h-full
+}
+
+body {
+  @apply bg-dark-blue grid items-center
+}
