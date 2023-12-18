@@ -1,18 +1,29 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
+const route = useRoute()
+const router = useRouter()
 const data = ref({});
 const isLoading = ref(false);
 const error = ref(null);
 
-init()
+init(route.query.number)
+
+watch(() => route.query.number, () => {
+    if (!route.query.number) init()
+})
 
 async function init (number) {
     isLoading.value = true
     error.value = null
 
     try {
-        const response = await fetch('https://api.adviceslip.com/advice')
+        let url = 'https://api.adviceslip.com/advice'
+
+        if (Number(number)) url += '/' + number
+
+        const response = await fetch(url)
         const d = await response.json()
 
         if (!response.ok) throw d
@@ -20,6 +31,8 @@ async function init (number) {
         data.value = d.slip
 
         if (!d.slip) throw "Not Found!"
+
+        await router.push({ query: { number: data.value.id } })
     } catch (e) {
         error.value = e
     }
