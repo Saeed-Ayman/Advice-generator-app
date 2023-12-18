@@ -28,7 +28,7 @@ async function init (number) {
 
         if (!d.slip) throw "Not Found!"
 
-        router.push({ query: { number: data.value.id } })
+        await router.push({ query: { number: data.value.id } })
     } catch (e) {
         console.log(e)
         error.value = e
@@ -73,8 +73,6 @@ async function init (number) {
                     </div>
                 </div>
             </div>
-
-
         </div>
     </section>
 </template>
