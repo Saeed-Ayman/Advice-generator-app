@@ -11,9 +11,6 @@ const error = ref(null);
 init(route.query.number)
 
 async function init (number) {
-    if (data.value.id == number) return
-
-    isLoading.value = true
     error.value = null
 
     try {
@@ -68,7 +65,10 @@ async function init (number) {
                     </div>
 
                     <div class="absolute w-full flex justify-center top-10">
-                        <button @click="init" :disabled="isLoading"
+                        <button @click="() => {
+                            isLoading = true
+                            init()
+                        }"
                             class="bg-neon-green p-4 rounded-full hover:shadow-[0_0_2px_#52ffa880,inset_0_0_2px_#52ffa880,0_0_5px_#52ffa880,0_0_15px_#52ffa880,0_0_30px_#52ffa880]">
                             <img src="./assets/icon-dice.svg" />
                         </button>
