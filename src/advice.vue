@@ -11,11 +11,13 @@ const error = ref(null);
 init(route.query.number)
 
 async function init (number) {
+    if (data.id == number) return
+
     isLoading.value = true
     error.value = null
 
     try {
-        var url = 'https://api.adviceslip.com/advice'
+        let url = 'https://api.adviceslip.com/advice'
 
         if (Number(number)) url += '/' + number
 
@@ -28,8 +30,7 @@ async function init (number) {
 
         if (!d.slip) throw "Not Found!"
 
-        if (route.query.number != data.value.id)
-            await router.push({ query: { number: data.value.id } })
+        await router.push({ query: { number: data.value.id } })
     } catch (e) {
         console.log(e)
         error.value = e
