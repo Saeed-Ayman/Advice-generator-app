@@ -11,7 +11,7 @@ const error = ref(null);
 init(route.query.number)
 
 async function init (number) {
-    if (data.id == number) return
+    if (data.value.id == number) return
 
     isLoading.value = true
     error.value = null
