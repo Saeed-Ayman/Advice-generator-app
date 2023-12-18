@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
@@ -10,10 +10,6 @@ const error = ref(null);
 
 init(route.query.number)
 
-watch(() => route.query.number, () => {
-    if (!route.query.number) init()
-})
-
 async function init (number) {
     isLoading.value = true
     error.value = null
@@ -23,7 +19,7 @@ async function init (number) {
 
         if (Number(number)) url += '/' + number
 
-        const response = await fetch(url)
+        const response = await fetch(url, { cache: 'no-store' })
         const d = await response.json()
 
         if (!response.ok) throw d
@@ -70,10 +66,10 @@ async function init (number) {
                     </div>
 
                     <div class="absolute w-full flex justify-center top-10">
-                        <router-link to="/"
+                        <button @click="init"
                             class="bg-neon-green p-4 rounded-full hover:shadow-[0_0_2px_#52ffa880,inset_0_0_2px_#52ffa880,0_0_5px_#52ffa880,0_0_15px_#52ffa880,0_0_30px_#52ffa880]">
                             <img src="./assets/icon-dice.svg" />
-                        </router-link>
+                        </button>
                     </div>
                 </div>
             </div>
