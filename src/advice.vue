@@ -27,13 +27,13 @@ async function init (number) {
 
         if (!d.slip) throw "Not Found!"
 
-        // await router.push({ query: { number: data.value.id } })
+        await router.push({ query: { number: data.value.id } })
     } catch (e) {
-        console.log(e)
         error.value = e
     }
-
-    isLoading.value = false
+    finally {
+        isLoading.value = false
+    }
 }
 
 </script>
