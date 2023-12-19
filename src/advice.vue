@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
@@ -10,7 +10,11 @@ const error = ref(null);
 
 init(route.query.number)
 
+watch(() => route.query.number, () => init(route.query.number))
+
 async function init (number) {
+    if (data.value.id && number == data.value.id) return
+
     isLoading.value = true
     error.value = null
 
@@ -28,7 +32,10 @@ async function init (number) {
 
         if (!d.slip) throw "Not Found!"
 
-        await router.push({ query: { number: data.value.id } })
+        if (!number)
+            await router.replace({ query: { number: data.value.id } })
+        if (route.query.number != number)
+            await router.push({ query: { number: data.value.id } })
     } catch (e) {
         error.value = e
     }
