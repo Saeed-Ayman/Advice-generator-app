@@ -12,7 +12,7 @@ init(route.query.number)
 
 watch(() => route.query.number, () => init(route.query.number))
 
-async function init (number) {
+async function init (Number) {
     if (data.value.id && number == data.value.id) return
 
     isLoading.value = true
